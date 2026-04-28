@@ -34,6 +34,16 @@ def add_amount():
         
         return round(amount, 2)
 
+# Принимает от пользователя категорию
+def add_category():
+    while True:
+        category = input("Введите название категории: ").strip().title()
+        if category == "":
+            print("Ошибка. Пустая строка.")
+            continue
+
+        return category
+
 # Добавляет новую запись в виде класса Expense
 def add_new_record():
 
@@ -45,7 +55,7 @@ def add_new_record():
     
     date = add_date()
     
-    category = input("Введите название категории: ").strip().title()
+    category = add_category()
 
     new_record = Expense(amount, category, date)
     
@@ -207,7 +217,7 @@ def find_records():
         begin, end = period()
         find_records_date(begin, end)
     elif choice == "3":
-        category = input("Введите название категории: ").strip()
+        category = add_category()
         find_record_category(category)
     else:
         print("Неизвестная команда. Возврат в меню.")
@@ -306,9 +316,11 @@ def load_records():
             print("Ошибка! У записи неверно указана дата:", date)
             print("Запись не будет загружена.")
             continue
+
+        new_record = Expense(amount, category, date)
         
-        if not record in records: 
-            records.append(Expense(amount, category, date))
+        if not new_record in records: 
+            records.append(new_record)
     
     print("Доступные записи были загружены!")
 
@@ -337,7 +349,7 @@ def save_records():
         json_list.append(json_record)
     
     print(f"\nСтарый файл {file} будет полностью перезаписан. Убедитесь, что данные из него были загружены или сохранены.")
-    choice = input("Загрузить записи? (да / нет) ").strip().lower()
+    choice = input("Сохранить записи? (да / нет) ").strip().lower()
     if choice != "да":
         print("Отмена.")
         return
@@ -392,7 +404,6 @@ def main():
         else:
             print("Неизвестная команда.")
 
-# Главное меню
 def main():
     global file
     was_loaded = False
