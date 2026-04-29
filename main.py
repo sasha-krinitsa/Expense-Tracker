@@ -376,52 +376,7 @@ def save_records():
     print(f"\nЗаписи были загружены в файл {file}.")
 
 
-def main():
-    global file
-    was_loaded = False
-
-    print("Ваш трекер расходов~")
-
-    while True:
-        print("\nВыберите команду:")
-        print("1. Добавить новую запись")
-        print("2. Просмотреть историю")
-        print("3. Удалить записи")
-        print("4. Найти записи по фильтру")
-        print("5. Рассчитать сумму расходов за период")
-        print(f"6. Загрузить записи из файла {file}")
-        print(f"7. Сохранить записи в файл {file}")
-        print("8. Завершение работы")
-
-        choice = input("> ").strip()
-
-        if choice == "1":
-            add_new_record()
-        elif choice == "2":
-            show_history()
-        elif choice == "3":
-            remove_records()
-        elif choice == "4":
-            find_records()
-        elif choice == "5":
-            find_amount_period()
-
-        elif choice == "6":
-            if was_loaded == False:
-                load_records()
-                was_loaded = True
-            else:
-                print(f"Записи из файла {file} уже были загружены.")
-        elif choice == "7":
-            save_records()
-
-        elif choice == "8":
-            print("До новых встреч!")
-            break
-        else:
-            print("Неизвестная команда.")
-
-
+# Главное меню
 def main():
     global file
     was_loaded = False
